@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nedtællingsur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        #countdown {
+            font-size: 3em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="number" id="minutes" placeholder="Minutter" />
+        <button onclick="startCountdown()">Start</button>
+        <div id="countdown">00:00</div>
+    </div>
+
+    <script>
+        function startCountdown() {
+            var minutesInput = document.getElementById("minutes").value;
+            var countdownElement = document.getElementById("countdown");
+            var totalTime = minutesInput * 60;
+
+            function updateCountdown() {
+                var minutes = Math.floor(totalTime / 60);
+                var seconds = totalTime % 60;
+
+                if (seconds < 10) {
+                    seconds = "0" + seconds;
+                }
+
+                countdownElement.textContent = minutes + ":" + seconds;
+
+                if (totalTime > 0) {
+                    totalTime--;
+                    setTimeout(updateCountdown, 1000);
+                }
+            }
+
+            updateCountdown();
+        }
+    </script>
+</body>
+</html>
